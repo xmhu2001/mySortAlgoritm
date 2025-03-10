@@ -9,13 +9,13 @@
 using namespace std;
 
 void testSortingAlgorithm(const string& name, void (*sortFunc)(vector<int>&)) {
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_int_distribution<int> dis(1, 100);
-    std::vector<int> arr(100);
-    for(int i=0;i<100;i++) arr[i] = dis(gen);
-
-    cout << "原始数组: ";
+    // std::random_device rd;
+    // std::mt19937 gen(rd());
+    // std::uniform_int_distribution<int> dis(1, 100);
+    // std::vector<int> arr(100);
+    // for(int i=0;i<100;i++) arr[i] = dis(gen);
+    std::vector<int> arr = {1, 3, 5, 7, 9, 2, 4, 6, 8, 10};
+    cout << "original arr: ";
     for(int num:arr) cout << num << " ";
     cout << endl;
     
@@ -25,17 +25,20 @@ void testSortingAlgorithm(const string& name, void (*sortFunc)(vector<int>&)) {
     auto end = chrono::high_resolution_clock::now();
     chrono::duration<double,milli> duration = end - start;
     
-    cout << name << " 排序后的数组: ";
+    cout << name << " sorted arr: ";
     for(int num:arr) cout << num << " ";
     cout << endl;
-    cout << name << " 排序耗时: " << duration.count() << " 毫秒" << endl;
+    cout << name << " time consumed: " << duration.count() << " ms" << endl;
 
     bool isSorted = is_sorted(arr.begin(), arr.end());
-    cout << name << " 是否排序: " << (isSorted ? "YES" : "NO") << endl;
+    cout << name << " isSorted: " << (isSorted ? "YES" : "NO") << endl;
+    cout << "---------------------------------" << endl;
 }
 
 int main() {
     testSortingAlgorithm("Bubble Sort", mysort::bubbleSort);
+    testSortingAlgorithm("Insertion Sort", mysort::insertionSort);
+    testSortingAlgorithm("Selection Sort", mysort::selectionSort);
 
     auto quickSortTest = [](vector<int>& arr) {
         mysort::quickSort(arr, 0, arr.size()-1);

@@ -14,6 +14,32 @@ void bubbleSort(std::vector<int>& arr) {
     }
 }  
 
+// 插入排序
+void insertionSort(std::vector<int>& arr) {
+    int n = arr.size();
+    for(int i=1;i<n;i++){
+        int key = arr[i];
+        int j = i-1;
+        while(j>=0 && arr[j]>key) {
+            arr[j+1] = arr[j];
+            j--;
+        }
+        arr[j+1] = key;
+    } 
+}
+
+// 选择排序
+void selectionSort(std::vector<int>& arr) {
+    int n = arr.size();
+    for(int i=0;i<n-1;i++){
+        int minIndex = i;
+        for(int j=i+1;j<n;j++){
+            if(arr[j]<arr[minIndex]) minIndex = j;
+        }
+        if(minIndex!=i) std::swap(arr[i],arr[minIndex]);
+    }
+}
+
 // 快排
 int partition(std::vector<int>&arr, int low, int high) {
     int pivot = arr[low];
