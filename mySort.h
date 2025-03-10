@@ -13,6 +13,33 @@ void bubbleSort(std::vector<int>& arr) {
         }
     }
 }  
-  
+
+// 快排
+int partition(std::vector<int>&arr, int low, int high) {
+    int pivot = arr[low];
+    while(low<high) {
+        while(low<high && arr[high]>=pivot) high--;
+        arr[low] = arr[high];
+        while(low<high && arr[low]<=pivot) low++;
+        arr[high] = arr[low];
+    }
+    arr[low] = pivot;
+    return low;
+}
+
+int randomized_partition(std::vector<int>& arr, int low, int high) {
+    int i = rand() % (high - low + 1) + low; 
+    std::swap(arr[low], arr[i]);
+    return partition(arr, low, high);
+}
+
+void quickSort(std::vector<int>& arr, int low, int high) {
+    if(low<high) {
+        int pi = randomized_partition(arr, low, high);
+        quickSort(arr, low, pi-1);
+        quickSort(arr, pi+1, high);
+    }
 } 
+
+}
 #endif
