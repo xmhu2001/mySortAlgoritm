@@ -2,6 +2,7 @@
 #define MYSORT_H
 
 #include <vector>
+#include <cstdlib>
 
 namespace mysort {
 // 冒泡排序
