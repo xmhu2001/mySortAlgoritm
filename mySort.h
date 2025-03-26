@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <cstdlib>
+#include <stack>
 
 namespace mysort {
 // 冒泡排序
@@ -46,7 +47,7 @@ int partition(std::vector<int>&arr, int low, int high) {
     int pivot = arr[low];
     while(low<high) {
         while(low<high && arr[high]>=pivot) high--;
-        arr[low] = arr[high];
+        arr[low] = arr[high];             
         while(low<high && arr[low]<=pivot) low++;
         arr[high] = arr[low];
     }
@@ -54,7 +55,7 @@ int partition(std::vector<int>&arr, int low, int high) {
     return low;
 }
 
-int randomized_partition(std::vector<int>& arr, int low, int high) {
+int randomized_partition(std::vector<int>& arr, int low, int high) {                                                                           
     int i = rand() % (high - low + 1) + low; 
     std::swap(arr[low], arr[i]);
     return partition(arr, low, high);
@@ -67,6 +68,35 @@ void quickSort(std::vector<int>& arr, int low, int high) {
         quickSort(arr, pi+1, high);
     }
 } 
+
+
+void quickSortNonRecursive(std::vector<int>& arr) {
+    if (arr.empty()) return;
+
+    std::stack<std::pair<int, int>> stack;
+    stack.push({0, (int)arr.size() - 1});
+
+    while (!stack.empty()) {
+        auto [left, right] = stack.top();
+        stack.pop();
+
+        if (left >= right) continue;
+
+        int pivot = arr[left];
+        int i = left, j = right;
+
+        while (i < j) {
+            while (i < j && arr[j] >= pivot) j--;
+            arr[i] = arr[j];
+            while (i < j && arr[i] <= pivot) i++;
+            arr[j] = arr[i];
+        }
+        arr[i] = pivot;
+
+        stack.push({left, i - 1});
+        stack.push({i + 1, right});
+    }
+}
 
 // 归并排序
 void mergeArray(std::vector<int>& arr, int left, int mid, int right) {

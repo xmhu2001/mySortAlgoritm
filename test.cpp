@@ -45,6 +45,12 @@ int main() {
     };
     testSortingAlgorithm("Quick Sort", quickSortTest);
 
+    auto quickSort2Test = [](vector<int>& arr) {
+        mysort::quickSortNonRecursive(arr);
+    };
+    testSortingAlgorithm("Quick Sort2", quickSort2Test);
+
+
     auto mergeSortTest = [](vector<int>& arr) {
         mysort::mergeSort(arr, 0, arr.size()-1);
     };
